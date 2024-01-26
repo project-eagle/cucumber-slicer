@@ -1,5 +1,5 @@
 {
-  "name": "@bbc/cucumber-slicer",
+  "name": "@dirwin517/cucumber-slicer",
   "version": "1.0.9",
   "description": "Split cucumber feature files into a separate file for each scenario",
   "main": "index.js",
@@ -24,7 +24,8 @@
   },
   "homepage": "https://github.com/bbc/cucumber-slices#readme",
   "dependencies": {
-    "gherkin": "^5.0.0"
+    "gherkin": "^5.0.0",
+    "glob": "^10.3.10"
   },
   "devDependencies": {
     "jest": "^24.9.0",
