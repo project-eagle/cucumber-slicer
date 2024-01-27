@@ -25,7 +25,8 @@
   "homepage": "https://github.com/bbc/cucumber-slices#readme",
   "dependencies": {
     "gherkin": "^5.0.0",
-    "glob": "^10.3.10"
+    "glob": "^10.3.10",
+    "gherkin-parse" : "1.0.8"
   },
   "devDependencies": {
     "jest": "^24.9.0",
