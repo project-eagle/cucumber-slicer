@@ -3,9 +3,9 @@ const { cucumberSlicer } = require('./lib/cucumber-slicer');
 const glob = require('glob');
 const { exec } = require('child_process');
 
-module.exports = (path) => {
+module.exports = (path, modulo = 3) => {
     const featureFiles = glob.sync('./src/test/resources/**/*.feature');
-    cucumberSlicer(featureFiles, './generatedFeatures');
+    cucumberSlicer(featureFiles, './generatedFeatures', modulo);
 
 
 // Define source and destination directories
