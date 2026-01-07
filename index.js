@@ -4,10 +4,22 @@ const glob = require('glob');
 const {exec} = require('child_process');
 
 module.exports = ({srcDirectory, path, modulo = 3}) => {
-
     // Define source and destination directories
     const generatedFFDirectory = srcDirectory + '/generatedFeatures';
     const destinationDirectory = path;
+
+    // Ensure generated dir exists
+    exec(`mkdir ${generatedFFDirectory}`, (error, stdout, stderr) => {
+        if (error) {
+            console.error(`Error creating Generated Feature dir: ${error.message}`);
+            return;
+        }
+        if (stderr) {
+            console.error(`stderr: ${stderr}`);
+            return;
+        }
+        console.log('Generated feature dir');
+    });
 
     // Do the sliceage
     const featureFiles = glob.sync(`.${path}/**/*.feature`);
