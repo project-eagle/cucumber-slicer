@@ -3,13 +3,13 @@ const {cucumberSlicer} = require('./lib/cucumber-slicer');
 const glob = require('glob');
 const {exec} = require('child_process');
 
-module.exports = ({path, modulo = 3}) => {
+module.exports = ({srcDirectory, path, modulo = 3}) => {
     const featureFiles = glob.sync(`.${path}/**/*.feature`);
     cucumberSlicer(featureFiles, './generatedFeatures', modulo);
 
 
 // Define source and destination directories
-    const sourceDirectory = './generatedFeatures';
+    const sourceDirectory = srcDirectory + '/generatedFeatures';
     const destinationDirectory = path;
 
 // Bash command to delete *.feature files recursively from the destination directory
