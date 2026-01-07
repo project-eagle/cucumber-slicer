@@ -13,7 +13,7 @@ module.exports = ({srcDirectory, path, modulo = 3}) => {
         console.log('Attempted to generate feature dir');
 
         // Do the sliceage
-        const featureFiles = glob.sync(`.${path}/**/*.feature`);
+        const featureFiles = glob.sync(`${path}/**/*.feature`);
         cucumberSlicer(featureFiles, generatedFFDirectory, modulo);
 
         // Bash command to delete *.feature files recursively from the destination directory
