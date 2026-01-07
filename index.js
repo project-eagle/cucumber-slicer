@@ -4,21 +4,22 @@ const glob = require('glob');
 const {exec} = require('child_process');
 
 module.exports = ({srcDirectory, path, modulo = 3}) => {
-    const featureFiles = glob.sync(`.${path}/**/*.feature`);
-    cucumberSlicer(featureFiles, './generatedFeatures', modulo);
 
-
-// Define source and destination directories
-    const sourceDirectory = srcDirectory + '/generatedFeatures';
+    // Define source and destination directories
+    const generatedFFDirectory = srcDirectory + '/generatedFeatures';
     const destinationDirectory = path;
 
-// Bash command to delete *.feature files recursively from the destination directory
+    // Do the sliceage
+    const featureFiles = glob.sync(`.${path}/**/*.feature`);
+    cucumberSlicer(featureFiles, generatedFFDirectory, modulo);
+
+    // Bash command to delete *.feature files recursively from the destination directory
     const deleteCommand = `find ${destinationDirectory} -type f -name "*.feature" -delete`;
 
-// Bash command to move files/folders from source to destination directory
-    const moveCommand = `mv ${sourceDirectory}/* ${destinationDirectory}`;
+    // Bash command to move files/folders from source to destination directory
+    const moveCommand = `mv ${generatedFFDirectory}/* ${destinationDirectory}`;
 
-// Execute the delete command
+    // Execute the delete command
     exec(deleteCommand, (error, stdout, stderr) => {
         if (error) {
             console.error(`Error deleting .feature files: ${error.message}`);
@@ -40,7 +41,7 @@ module.exports = ({srcDirectory, path, modulo = 3}) => {
                 console.error(`stderr: ${stderr}`);
                 return;
             }
-            console.log(`Moved files from ${sourceDirectory} to ${destinationDirectory}`);
+            console.log(`Moved files from ${generatedFFDirectory} to ${destinationDirectory}`);
         });
     });
 };
